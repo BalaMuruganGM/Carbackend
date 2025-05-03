@@ -4,17 +4,47 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const multer = require('multer');
 const cors = require('cors');
-// const { error } = require('console');
 const app = express();
 app.use(cors());
 app.use( bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
+// Login page
+
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public' , 'login.html'));
+  });
+  
+  // Handle login
+  app.post('/admin/login', (req, res) => {
+    const { username, password } = req.body;
+  
+    const adminUser = {
+      username: 'admin',
+      password: '1234'
+    };
+  
+    if (username === adminUser.username && password === adminUser.password) {
+      // Successful login
+      res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    } else {
+      // Failed login
+      res.send('<h2>Invalid login. <a href="/admin">Try again</a></h2>');
+    }
+  });
+  
 
 const db = mysql.createConnection({
-    host: 'auth-db1559.hstgr.io',
-    user: 'u471227235_Tamilan',
-    password: 'Tamilan@1234', // replace with real password
-    database: 'u471227235_Tamilan_car123'
+
+    host : "193.203.184.112",
+    user : "u471227235_Tamilan",
+    password : "Tamilan@1234",
+    database : "u471227235_Tamilan_car123"
+    // host: 'auth-db1559.hstgr.io',
+    // user: 'u471227235_Tamilan',
+    // password: 'Tamilan@1234', // replace with real password
+    // database: 'u471227235_Tamilan_car123'
 });
 
 db.connect((error)=>{
@@ -758,9 +788,32 @@ app.put('/pageList/update/:id', upload.fields([
 // Listing Page Clouses
 
 
+// page list delete  start
+
+app.delete('/pageList/delete/:id', (req, res) => {
+    const id = req.params.id;
+    const sql = 'DELETE FROM photo5 WHERE id = ?';
+
+    db.query(sql, [id], (err, result) => {
+        if (err) {
+            console.error('Delete error:', err);
+            return res.status(500).json({ status: false, message: 'Database delete error' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ status: false, message: 'Car not found' });
+        }
+
+        res.json({ status: true, message: 'Car deleted successfully' });
+    });
+});
+
+
+// page list delete  clouses
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.listen(4015 , (error)=>{
+app.listen(4015 , '0.0.0.0' ,  (error)=>{
     if(error){
         console.log(error);
     }
