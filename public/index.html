@@ -1386,7 +1386,7 @@ td img{
     <!-- <script src="./personal.js"></script> -->
 
     <script>
-        fetch('http://localhost:4015/images/get')
+        fetch('http://207.244.228.247:4015/images/get')
 .then((response)=>{
     if(response.ok){
         return response.json();
@@ -1472,7 +1472,7 @@ document.getElementById('updateForm').addEventListener('submit', async function 
     formData.append('images', fileInput.files[0]); // Add image file
 
     try {
-        let response = await fetch(`http://localhost:4015/images/put/${id}`, {
+        let response = await fetch(`http://207.244.228.247:4015/images/put/${id}`, {
             method: 'PUT',
             body: formData
         });
@@ -1495,7 +1495,7 @@ document.getElementById('updateForm').addEventListener('submit', async function 
 
 // Listen page is Start
 
-fetch('http://localhost:4015/List/get')
+fetch('http://207.244.228.247:4015/List/get')
     .then(response => {
         if (response.ok) {
             return response.json();
@@ -1634,7 +1634,7 @@ document.getElementById('updateCarForm').addEventListener('submit', function(e) 
 
     const id = document.getElementById('editId').value;
 
-    fetch(`http://localhost:4015/Listing/update/${id}`, {
+    fetch(`http://207.244.228.247:4015/Listing/update/${id}`, {
         method: 'PUT',
         body: formData
     })
@@ -1657,7 +1657,7 @@ document.getElementById('updateCarForm').addEventListener('submit', function(e) 
 
 // Body Listing Start
 
-fetch('http://localhost:4015/BodyList/get')
+fetch('http://207.244.228.247:4015/BodyList/get')
 .then(response => {
     if (response.ok) {
         return response.json();
@@ -1793,7 +1793,7 @@ document.getElementById('bodyForm').addEventListener('submit', function(e) {
     }
         const id = document.getElementById('BcarId').value;
 
-    fetch(`http://localhost:4015/BodyList/update/${id}`, {
+    fetch(`http://207.244.228.247:4015/BodyList/update/${id}`, {
         method: 'PUT',
         body: formData
     })
@@ -1817,7 +1817,7 @@ document.getElementById('bodyForm').addEventListener('submit', function(e) {
 //body Listing  delete code start
 
 function deleteCar(id) {
-    fetch(`http://194.164.148.216:4015/BodyList/delete/${id}`, {
+    fetch(`http://207.244.228.247:4015/BodyList/delete/${id}`, {
         method: 'DELETE'
     })
     .then(response => response.json())
@@ -1891,7 +1891,7 @@ function deleteCar(id) {
     formData.append('image4', image4);
 
     // Send the POST request with fetch()
-    fetch('http://194.164.148.216:4015/BodyListing/post', {
+    fetch('http://207.244.228.247:4015/BodyListing/post', {
       method: 'POST',
       body: formData
     })
@@ -1950,7 +1950,7 @@ function LForm() {
     console.log('Form Data:', formData);
 
     // Send data to backend
-    fetch('http://194.164.148.216:4015/pageListing/post', {
+    fetch('http://207.244.228.247:4015/pageListing/post', {
       method: 'POST',
       body: formData
     })
@@ -1968,7 +1968,7 @@ function LForm() {
 
 // List page post clouses
 
-fetch('http://194.164.148.216:4015/pageList/get')
+fetch('http://207.244.228.247:4015/pageList/get')
 .then(response => {
     if (response.ok) {
         return response.json();
@@ -2109,7 +2109,7 @@ if (document.getElementById('image4').files.length > 0) {
 }
     const id = document.getElementById('LcarId').value;
 
-fetch(`http://194.164.148.216:4015/pageList/update/${id}`, {
+fetch(`http://207.244.228.247:4015/pageList/update/${id}`, {
     method: 'PUT',
     body: formData
 })
@@ -2134,7 +2134,7 @@ fetch(`http://194.164.148.216:4015/pageList/update/${id}`, {
 // Lpage delete Start 
 
 function pageDeleteCar(id) {
-    fetch(`http://194.164.148.216:4015/pageList/delete/${id}`, {
+    fetch(`http://207.244.228.247:4015/pageList/delete/${id}`, {
         method: 'DELETE'
     })
     .then(response => response.json())
